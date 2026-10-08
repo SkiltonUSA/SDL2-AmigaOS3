@@ -104,8 +104,9 @@ All 76,800 iteration counts matched the independent oracle in each of 14
 completed renders: ARM/68k, default/zoom/pan, changed iterations, Workbench
 and temporary 16-/32-bit screens. Six rapid cancel/zoom cycles, rendering
 while iconified, restore and overlapping windows passed. The window-move
-command was acknowledged; an explicit asynchronous position assertion was
-added to the harness afterward and remains to be exercised.
+command was acknowledged; a later standalone test independently verified
+the window position at (680,300). The harness now waits for asynchronous
+Intuition movement before checking its position.
 Idle timing stayed unchanged. Shutdown reported RET1 and released the owned
 allocation; the bridge remained responsive with no registered client.
 
@@ -135,19 +136,30 @@ The standalone build omits MCP/relay linkage and embeds its ARM payload.
 Audio, texture-renderer compatibility, arbitrary resizing/scaling, other
 hardware and cache-enabled ARM execution remain outside this milestone.
 
-## Standalone package check — pending physical input recovery
+## Standalone distribution acceptance
 
-The native LHA passed integrity testing and fresh extraction on the Amiga;
-the extracted executable MD5 matched `364ec823dea2615b6dc3fb5e91319177`.
-The standalone app launched from Shell and visibly completed its ARM render.
+The 1,153,524-byte standalone executable passed native LHA integrity testing
+and fresh extraction. Every one of the LHA's 10 files matches the ZIP.
+Extracted and installed executable MD5: `364ec823dea2615b6dc3fb5e91319177`.
+Shell execution produced matching default CPU/ARM checksums `fb32f6c6`,
+handled cancellation and discarded its old response. Ctrl-C shutdown returned
+RET1, exited 0 and released its allocation.
 
-![Standalone ARM render](../evidence/2026-10-08/sdl-fractal/standalone-workbench.png)
+The app is installed at `SD032G:Dev/SDLZZFractal-0.2/SDLZZFractal` with native
+Workbench icons and a 131072-byte stack. Workbench launch through WBLoad,
+the firmware-confirmation requester, default ARM rendering, an independently
+verified move to (680,300), and Q quit passed. The owner port disappeared
+and the bridge remained responsive after quit. No OS/firmware/preferences
+or startup files changed. Close other Core1 apps before launching it.
 
-Keyboard CPU/ARM/cancel events were injected and iconification removed the
-window. During the native Workbench AppIcon double-click check, the bridge
-stopped responding after an injected button-down. Its input code documents
-an Intuition icon-drag stall requiring physical button release. The machine
-still answered network pings. Actual AppIcon restoration, standalone log and
-clean-exit checks, Workbench startup and persistent installation remain
-pending; this does not invalidate the completed developer-build suite.
-The release is held as a draft until this is resolved.
+![Installed Workbench application](../evidence/2026-10-08/sdl-fractal/standalone-workbench.png)
+
+**Remaining input check:** native iconification passed, and developer-hook
+restoration passed. Synthetic mouse input on the native Workbench AppIcon
+stalled the bridge, consistent with its documented Intuition icon-drag
+limitation. After recovery, Workbench ARexx `ICON ROOT "SDL ZZFractal" OPEN`
+returned OK without restoring the window. Physical double-click restoration
+therefore remains unverified; do not describe it as a completed test. Recovery
+needed no reboot, and the standalone app subsequently shut down cleanly.
+The Workbench ARexx command follows the
+[AmigaOS documentation](https://wiki.amigaos.net/wiki/Workbench_ARexx_Port).
