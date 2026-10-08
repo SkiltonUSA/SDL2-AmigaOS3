@@ -11,3 +11,5 @@
   example, pinned build wrapper, checksums and A4000TX acceptance evidence.
 - Disable upstream file-debug logging in the release build. Library remains
   `-O0`; ARM offloading is application-owned and not part of this SDL build.
+- Rebuild archives from scratch to prevent duplicate C2P assembly members;
+  both relinked diagnostics are byte-identical to the hardware-tested programs.

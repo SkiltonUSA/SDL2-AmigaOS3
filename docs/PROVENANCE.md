@@ -11,6 +11,10 @@
 - Exact local patch SHA-256: `2da264f70a3bdbf81b4df693d947f3de1de7e9405d9499a27e7dd9f1eb105c91`.
 - Hardware-tested `libSDL2.a` SHA-256:
   `59a641479effc2a67853b9c91a01dd015ef2e38b90b9d4cab3cc9b6e3ebe8e96`.
+- Clean SDK `libSDL2.a` SHA-256:
+  `eb805aac436378a29a20fb50270e7c21cb8dbe61fdf6f317ff62418ba16be000`.
+  Duplicate C2P archive members removed; both relinked hardware diagnostics
+  remain byte-identical. See [validation](VALIDATION.md).
 - Compiler image:
   `docker.io/amigadev/crosstools@sha256:93ca1a47903b61873f6638881b44f9f2d6086a39f1b9b916a26faff3a8ea4d3d`.
 - Container platform: `linux/amd64`; compiler: `m68k-amigaos-gcc`.

@@ -1,0 +1,12 @@
+{
+  "sdl-probe": {
+    "sha256": "1860e97f9cdf8d21f9e3432a4a11bbb4c881feff4ff654b00f4f05946fdd8639",
+    "hardware_tested_sha256": "1860e97f9cdf8d21f9e3432a4a11bbb4c881feff4ff654b00f4f05946fdd8639",
+    "identical": true
+  },
+  "sdl-arm-probe": {
+    "sha256": "c37b489d830580fcc17b5521a824fd48cb0323328a1f5443fc4c93bdfe48ceda",
+    "hardware_tested_sha256": "c37b489d830580fcc17b5521a824fd48cb0323328a1f5443fc4c93bdfe48ceda",
+    "identical": true
+  }
+}

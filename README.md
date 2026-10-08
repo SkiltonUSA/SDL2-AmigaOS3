@@ -77,6 +77,7 @@ AmigaOS and graphics backend requirements.
 
 ## Build and package
 
+Run these commands from a clone of this source repository.
 Python 3 and Docker or Podman are required. The wrapper pins the compiler image
 by digest, uses `-O0 -m68030 -noixemul` for the library, and creates ZIP/tar.gz
 SDKs plus `SHA256SUMS` in `dist/`:

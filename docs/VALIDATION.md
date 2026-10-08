@@ -40,8 +40,16 @@ The standalone SDK is rebuilt from this repository with the pinned compiler,
 and its included example is linked using the staged SDK headers and static
 library. See `evidence/distribution-verification.json` for results and hashes.
 The SDK example itself is a compile/link check, not an additional physical
-acceptance run. Matching the previously tested library hash establishes
-binary identity; it does not broaden the acceptance scope.
+acceptance run. The clean archive has a different hash from the earlier archive because
+repeated upstream builds appended three duplicate C2P assembly members.
+All 149 rebuilt object files are identical. Relinking **both original hardware
+diagnostics** against the clean SDK produces byte-for-byte identical
+executables to the ones physically tested. See
+[archive comparison](../evidence/archive-comparison.json) and
+[probe relink hashes](../evidence/probe-relink-verification.json).
+This establishes identity of the tested programs, not broader API coverage.
+The wrapper removes old objects and archives before each build to prevent
+stale/duplicate members from accumulating.
 
 ## Still unverified
 

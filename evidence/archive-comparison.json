@@ -1,0 +1,14 @@
+{
+  "object_files_compared": 149,
+  "all_object_files_identical": true,
+  "old_library_bytes": 1303912,
+  "clean_library_bytes": 1300408,
+  "removed_duplicate_archive_members": [
+    "c2p1x1_8_c5_gen.s-00000002.o",
+    "c2p1x1_8_c5_gen.s-00000003.o",
+    "c2p1x1_8_c5_gen.s-00000004.o"
+  ],
+  "clean_library_sha256": "eb805aac436378a29a20fb50270e7c21cb8dbe61fdf6f317ff62418ba16be000",
+  "hardware_tested_library_sha256": "59a641479effc2a67853b9c91a01dd015ef2e38b90b9d4cab3cc9b6e3ebe8e96",
+  "linked_probes": "probe-relink-verification.json"
+}

@@ -1,0 +1,10 @@
+{
+  "build_revision": "b6d16a1a84ebf3ff400ddc7d9a9f17996bcf100b",
+  "library_source_sha256": "0c933b9caffb497a478d60d44333eef86139e0e4692f1e03916906e9195a13ee",
+  "hardware_tested_library_sha256": "59a641479effc2a67853b9c91a01dd015ef2e38b90b9d4cab3cc9b6e3ebe8e96",
+  "rebuilt_library_sha256": "eb805aac436378a29a20fb50270e7c21cb8dbe61fdf6f317ff62418ba16be000",
+  "rebuilt_library_matches_hardware_tested_binary": false,
+  "sdk_example_link_verified": true,
+  "sdk_example_hardware_execution_verified": false,
+  "hardware_acceptance_scope": "docs/VALIDATION.md"
+}
