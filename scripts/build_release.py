@@ -96,6 +96,7 @@ def main():
         "build_revision": git("rev-parse", "HEAD"),
         "library_source_sha256": source_hash.hexdigest(),
         "patch_sha256": sha(ROOT / "patches/window-safety.patch"),
+        "public_screen_patch_sha256": sha(ROOT / "patches/public-screen.patch"),
         "compiler_image": IMAGE,
         "compiler_version": compiler,
         "container_platform": "linux/amd64",
@@ -108,7 +109,7 @@ def main():
         "arm_offloading_in_sdl": False,
     }
     (stage / "build-info.json").write_text(json.dumps(metadata, indent=2) + "\n")
-    tested_sha = "59a641479effc2a67853b9c91a01dd015ef2e38b90b9d4cab3cc9b6e3ebe8e96"
+    tested_sha = "bf90c1f12536df97bfc85e838cc2fa0047fc23f37d5128dbb89bb38dddec386e"
     verification = {
         "build_revision": metadata["build_revision"],
         "library_source_sha256": metadata["library_source_sha256"],

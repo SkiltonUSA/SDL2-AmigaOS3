@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.2.0 — 2026-10-08 (preview)
+
+- Add the `SDL_AMIGA_PUBLIC_SCREEN` hint with an explicit screen lock across
+  window creation. Empty/unset selects the default; unavailable named RTG
+  screens fail without silently changing the display.
+- Add a self-contained SDL ZZFractal source example and standalone executable
+  packaging: zoom, pan, iteration limits, CPU/ARM selection, cancellation,
+  native Workbench iconify/restore and temporary RTG test screens.
+- Separate measured compute, transfer, colour mapping and SDL drawing costs.
+  ARM timing reads and calibrates the existing global timer without changing
+  it. The shared-memory allocation/cache contract remains unchanged.
+- Keep SDL itself on the 68k; the application's bounded tile client and worker
+  demonstrate explicit ARM offloading.
+
 ## 0.1.0 — 2026-10-08 (preview)
 
 - Import SDL2 headers 2.33.0 and library source from bdgscotland's AmigaOS3

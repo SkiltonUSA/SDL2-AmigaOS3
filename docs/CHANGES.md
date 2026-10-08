@@ -59,3 +59,20 @@ git checkout 1eefa8f35c5ad4b63fa835e251e801a9315dff5c
 git apply --check /path/to/window-safety.patch
 git apply /path/to/window-safety.patch
 ```
+
+## 0.2.0: named public screens
+
+`src/video/amigaos3/SDL_os3window.c` adds the Amiga-specific
+`SDL_AMIGA_PUBLIC_SCREEN` hint. The backend locks that existing public screen,
+checks its RTG compatibility and dimensions, and locks it again across native
+window creation so it cannot disappear between lookup and opening the window.
+The second lock is released after `OpenWindowTags` succeeds or fails. Empty
+and unset values mean the default public screen; a missing/incompatible named
+screen reports an error. No default-screen or Workbench setting is changed.
+The original two-file patch remains separate and unchanged; the additional
+patch is [public-screen.patch](../patches/public-screen.patch).
+
+The SDL ZZFractal example uses this hint for temporary 16-bit and 32-bit-storage
+RTG screens. Intuition colour depth is capped at 24 while native bytes-per-pixel
+is checked independently. Iconify/restore is an application-level Workbench
+AppIcon implementation; generic `SDL_HideWindow` remains unchanged.

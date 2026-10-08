@@ -32,3 +32,18 @@ a successful build does not establish API compatibility or hardware execution.
 The original diagnostic source and complete ARM launcher remain in
 [Amiga-MCP-Debugger at dcad46b](https://github.com/SkiltonUSA/Amiga-MCP-Debugger/tree/dcad46b/amiga/sdl_probe).
 This SDK does not incorporate or require that application's ARM components.
+
+## 0.2.0 additions
+
+The named public-screen change is separately recorded in
+`patches/public-screen.patch`. The new clean library SHA-256 is
+`bf90c1f12536df97bfc85e838cc2fa0047fc23f37d5128dbb89bb38dddec386e`.
+The historical hashes and exact-probe-relink comparison above describe 0.1.0.
+0.2.0 is validated with the interactive SDL ZZFractal application instead.
+
+The self-contained example comes from the project-owned Amiga/ZZ9000 developer
+sources. Its launcher reserves actual free Exec memory, validates the ARM
+translation, and returns/resets Core1 before freeing the allocation. It includes
+no firmware, ROM, AmigaOS or driver binaries. `examples/zzfractal/sdl.json`
+pins its SDL dependency. `scripts/build_fractal.py` records the actual source
+identity, compiler settings, ARM relocations and output hashes.

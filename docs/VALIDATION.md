@@ -1,5 +1,8 @@
 # Verification scope
 
+The historical results below describe SDK 0.1.0. SDK 0.2.0 adds the
+[interactive SDL ZZFractal acceptance](SDL-ZZFractal.md).
+
 ## Physical A4000TX acceptance — 2026-10-08
 
 Hardware: TF4060/68060, ZZ9000; AmigaOS 3.2.3;
