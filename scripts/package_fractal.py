@@ -22,7 +22,7 @@ def main():
         files['SDLZZFractal/'+name]=(source/name).read_bytes()
     files['SHA256SUMS.txt']=''.join(hashlib.sha256(data).hexdigest()+'  '+name+'\n' for name,data in sorted(files.items())).encode()
     dist.mkdir(exist_ok=True);stage=build/'package';stage.mkdir(exist_ok=True)
-    archive=dist/'SDLZZFractal-0.2-XX19c.zip'
+    archive=dist/('SDLZZFractal-'+record['version']+'-XX19c.zip')
     with zipfile.ZipFile(archive,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
         for name,data in sorted(files.items()):
             target=stage/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(data)

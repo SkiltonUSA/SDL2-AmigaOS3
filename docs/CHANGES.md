@@ -77,3 +77,11 @@ The SDL ZZFractal example uses this hint for temporary 16-bit and 32-bit-storage
 RTG screens. Intuition colour depth is capped at 24 while native bytes-per-pixel
 is checked independently. Iconify/restore is an application-level Workbench
 AppIcon implementation; generic `SDL_HideWindow` remains unchanged.
+
+## SDL ZZFractal 0.3: kernel and scheduling
+
+The example now uses an optimized exact Q14 kernel, row-bounded ARM slices,
+a two-millisecond work budget and a private one-millisecond timer yield.
+TIM3 validates the request, timing metadata and tile before use and preserves
+ownership during visibility rechecks. See [measured results and validation](SDL-ZZFractal.md#03-performance-and-shared-memory-validation).
+The SDL2 library, headers and patches are unchanged from SDK 0.2.0.

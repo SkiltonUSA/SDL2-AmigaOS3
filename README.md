@@ -13,7 +13,9 @@ with an application-owned ARM worker; ordinary SDL calls remain on the 68k.
 ## Versions and downloads
 
 [Download releases](https://github.com/SkiltonUSA/SDL2-AmigaOS3/releases).
-`v0.2.0` adds named public-screen selection and the interactive SDL ZZFractal example.
+`v0.2.0` provides the SDL2 SDK. `fractal-v0.3.0` updates only the standalone
+fractal application, using the same library. The SDK adds named public-screen
+selection and the interactive example.
 `v0.1.0` remains available as the initial window-fix preview. The inherited SDL header
 version is **2.33.0**; upstream's Amiga port version was **0.7.0**. These are
 separate version numbers. This is not an official SDL release or a claim of
@@ -48,7 +50,7 @@ Read [the patch explanation](docs/CHANGES.md),
 
 ## Interactive ARM example
 
-**SDL ZZFractal 0.2** is available as a separate executable LHA/ZIP in the release.
+**SDL ZZFractal 0.3** is available as a separate executable LHA/ZIP in the release.
 It supports CPU/ARM rendering, click-to-zoom, pan, iteration limits, cancellation
 and Workbench iconify/restore. Temporary RTG test screens leave Workbench
 preferences untouched. It requires the tested ZZ9000 XX19c/XACP 1.7 setup;
@@ -63,19 +65,19 @@ python3 scripts/package_fractal.py
 ```
 
 Clang with an ARM target and LLVM `ld.lld` are also required. The resulting
-`dist/SDLZZFractal-0.2-XX19c.zip` needs no Mac, MCP, network or separate ARM file.
+`dist/SDLZZFractal-0.3-XX19c.zip` needs no Mac, MCP, network or separate ARM file.
 This application-owned ARM worker does not make ordinary SDL calls run on ARM.
 Its raw compute and end-to-end timings are deliberately reported separately.
 
 ## Fractal comparison: with and without SDL2
 
-Recorded default 320×240 Mandelbrot renders on the same A4000TX / TF4060 /
+Historical comparison before the 0.3 kernel/scheduler work. Recorded default 320×240 Mandelbrot renders on the same A4000TX / TF4060 /
 ZZ9000. These are whole-render wall times; lower is better.
 
 | Application | SDL2 | ARM render | 68060 render |
 | --- | --- | ---: | ---: |
 | Original native ZZFractal | Without SDL2 | 7.523 seconds | 15.081 seconds |
-| SDL ZZFractal | With SDL2 | 7.575 seconds | 17.427 seconds |
+| SDL ZZFractal 0.2 | With SDL2 | 7.575 seconds | 17.427 seconds |
 
 Both versions matched the same reference frame (`fb32f6c6`, all 76,800
 iteration counts). These were separate individual application runs, **not a
@@ -83,7 +85,7 @@ controlled benchmark of SDL2 overhead**. Drawing, instrumentation and scheduling
 differ, so the time difference cannot be attributed to SDL2 alone.
 
 SDL2 provided a reusable graphics/input interface and tested 16-/32-bit RTG
-support; these measurements show no rendering speed improvement. SDL calls
+support; these pre-0.3 measurements show no rendering speed improvement. SDL calls
 remain on the 68060, with explicit computation sent to a separate ARM worker.
 In the SDL version, measured computation took about 2.894 seconds on ARM
 versus 2.233 seconds on the 68060. ARM caches remain disabled, and scheduling
@@ -92,6 +94,34 @@ and compilation differ; shorter ARM wall time is not a raw CPU speed ratio.
 Evidence: [native baseline](evidence/2026-10-08/sdl-fractal/native-baseline.json),
 [SDL acceptance runs](evidence/2026-10-08/sdl-fractal/acceptance.json), and
 [timing definitions and limitations](docs/SDL-ZZFractal.md#measurements).
+
+## Kernel and scheduling performance: 0.2 versus 0.3
+
+The SDL library is **unchanged**: both use the published SDL2 0.2.0 SDK.
+These improvements are in the fractal kernel, scheduling and checked tile
+handoff. Same A4000TX, default 320×240 Q14 view, 128 iterations; medians of
+three runs per mode in each developer build. Lower is better.
+
+| Measurement | Fractal 0.2 | Fractal 0.3 | Improvement |
+| --- | ---: | ---: | ---: |
+| ARM whole render | 7.609 s | 3.848 s | 1.98×; 49.4% less time |
+| ARM compute estimate | 2.899 s | 1.472 s | 1.97×; 49.2% less time |
+| 68060 whole render | 17.292 s | 4.328 s | 4.00×; 75.0% less time |
+| 68060 compute | 2.235 s | 1.692 s | 1.32×; 24.3% less time |
+
+All measured frames matched the independent oracle. The CPU path benefits from
+the common exact-integer kernel and much shorter scheduling waits. ARM work
+slices preserve row checkpoints; its MMU and caches remain off. These are
+application measurements with bridge instrumentation, not a general CPU or SDL
+benchmark. A zoomed view took 5.665 s on ARM and 9.695 s on the 68060 in 0.3
+(single runs). Transfer, drawing and computation overlap; do not add them.
+
+Evidence: [baseline repeats](evidence/2026-10-08/sdl-performance/baseline.json),
+[0.3 repeats](evidence/2026-10-08/sdl-performance/final.json), and
+[implementation and integrity investigation](docs/SDL-ZZFractal.md#03-performance-and-shared-memory-validation).
+
+Host validation of the shipped compute sources: `python3 -m unittest discover -s tests -v`
+(Clang required; this does not replace physical Amiga testing).
 
 ## Use the SDK
 

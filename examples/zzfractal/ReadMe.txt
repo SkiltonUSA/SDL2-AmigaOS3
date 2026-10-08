@@ -1,4 +1,4 @@
-SDL ZZFractal 0.2 - A4000TX / ZZ9000 preview
+SDL ZZFractal 0.3 - A4000TX / ZZ9000 preview
 
 Interactive SDL2 Mandelbrot explorer with a separate Cortex-A9 compute worker.
 The 68k owns SDL, input, drawing and AmigaOS calls. Firmware is not included.
@@ -48,8 +48,9 @@ timer calibrated against the Amiga E-clock. Transfer includes request/result
 cache synchronization and pixel copying on the 68k; colour mapping and SDL
 updates have separate measurements. ARM request roundtrip includes waiting
 and overlaps compute/transfer; do not add these columns together.
-The 68k yields one OS tick between bounded work slices. Scheduling differs
-between CPU and ARM modes, so total render ratios are NOT raw CPU speed ratios.
+Both modes use a 2 ms ready-work target and a private 1 ms timer yield.
+Drawing and OS calls can exceed that target. Total render ratios are NOT
+raw CPU speed ratios. Idle/fallback operation retains the one-tick OS yield.
 The ARM worker's MMU and caches remain disabled. CPU and ARM builds also use
 different compilers/options. The SDK library retains -O0.
 
@@ -58,3 +59,11 @@ Preview for the tested configuration. No audio, arbitrary window resizing,
 SDL texture-renderer, generic ARM runtime or instruction stepping is implied.
 No firmware/cache policy changes. Test records and source:
 https://github.com/SkiltonUSA/SDL2-AmigaOS3
+
+Performance update 0.3
+----------------------
+The Q14 kernel keeps orbit state in registers where possible, preserves exact
+integer output, and uses bounded row checkpoints. A private timer request
+yields between short work slices. Shared tile results and timing counters are
+validated against the request before use; incomplete visibility is rechecked
+within the existing ten-second timeout. The SDL2 library is still SDK 0.2.0.
