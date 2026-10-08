@@ -626,9 +626,9 @@
     "render while iconified",
     "restore",
     "overlap during render",
-    "move window",
     "idle measurements frozen",
     "RET1 and allocation release"
   ],
-  "note": "build.arm_execution_verified is a build-time default, not the outcome; this acceptance record establishes physical execution."
+  "note": "build.arm_execution_verified is a build-time default, not the outcome; this acceptance record establishes physical execution.",
+  "window_movement": "Command acknowledged; explicit asynchronous position assertion added afterward, pending execution."
 }

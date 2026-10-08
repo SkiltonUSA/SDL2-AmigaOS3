@@ -103,7 +103,9 @@ Physical acceptance on 2026-10-08 passed on the A4000TX / TF4060 / XX19c.
 All 76,800 iteration counts matched the independent oracle in each of 14
 completed renders: ARM/68k, default/zoom/pan, changed iterations, Workbench
 and temporary 16-/32-bit screens. Six rapid cancel/zoom cycles, rendering
-while iconified, restore, overlapping windows and moving the window passed.
+while iconified, restore and overlapping windows passed. The window-move
+command was acknowledged; an explicit asynchronous position assertion was
+added to the harness afterward and remains to be exercised.
 Idle timing stayed unchanged. Shutdown reported RET1 and released the owned
 allocation; the bridge remained responsive with no registered client.
 
@@ -132,3 +134,20 @@ The standalone build omits MCP/relay linkage and embeds its ARM payload.
 
 Audio, texture-renderer compatibility, arbitrary resizing/scaling, other
 hardware and cache-enabled ARM execution remain outside this milestone.
+
+## Standalone package check — pending physical input recovery
+
+The native LHA passed integrity testing and fresh extraction on the Amiga;
+the extracted executable MD5 matched `364ec823dea2615b6dc3fb5e91319177`.
+The standalone app launched from Shell and visibly completed its ARM render.
+
+![Standalone ARM render](../evidence/2026-10-08/sdl-fractal/standalone-workbench.png)
+
+Keyboard CPU/ARM/cancel events were injected and iconification removed the
+window. During the native Workbench AppIcon double-click check, the bridge
+stopped responding after an injected button-down. Its input code documents
+an Intuition icon-drag stall requiring physical button release. The machine
+still answered network pings. Actual AppIcon restoration, standalone log and
+clean-exit checks, Workbench startup and persistent installation remain
+pending; this does not invalidate the completed developer-build suite.
+The release is held as a draft until this is resolved.
