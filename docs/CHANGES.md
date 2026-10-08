@@ -2,7 +2,8 @@
 
 Base: `bdgscotland/libSDL2-amigaos3` at
 `1eefa8f35c5ad4b63fa835e251e801a9315dff5c`.
-The exact delta is [window-safety.patch](../patches/window-safety.patch).
+The initial fix is [window-safety.patch](../patches/window-safety.patch);
+v0.2.0 adds [public-screen.patch](../patches/public-screen.patch) on top.
 The first repository commit imports the unmodified library source; the next
 applies this patch and adds distribution documentation/build tooling.
 

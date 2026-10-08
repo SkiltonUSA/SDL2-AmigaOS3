@@ -7,8 +7,8 @@ verified using an A4000TX and ZZ9000.
 
 This project packages the **68k static SDL2 library** and development headers.
 SDL calls still execute on the 68k. There is no automatic ARM offloading,
-ZZ9000 firmware, or ARM runtime in this SDK. Applications can integrate a
-separate ARM worker, as demonstrated by the linked hardware test.
+or firmware changes in the SDL library. The SDK includes a separate example
+with an application-owned ARM worker; ordinary SDL calls remain on the 68k.
 
 ## Versions and downloads
 
@@ -48,7 +48,7 @@ Read [the patch explanation](docs/CHANGES.md),
 
 ## Interactive ARM example
 
-**SDL ZZFractal 0.2** is available as a separate executable ZIP in the release.
+**SDL ZZFractal 0.2** is available as a separate executable LHA/ZIP in the release.
 It supports CPU/ARM rendering, click-to-zoom, pan, iteration limits, cancellation
 and Workbench iconify/restore. Temporary RTG test screens leave Workbench
 preferences untouched. It requires the tested ZZ9000 XX19c/XACP 1.7 setup;

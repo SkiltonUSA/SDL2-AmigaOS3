@@ -61,3 +61,9 @@ occlusion/movement, SDL's texture renderer, 32-bit screen performance, other
 RTG cards and the upstream SDL suite remain untested. No OpenRCT2 execution
 or general ARM acceleration is claimed. The probes made no persistent AmigaOS
 configuration or firmware changes and were stopped after acceptance.
+
+## 0.2.0 interactive application acceptance
+
+See [SDL ZZFractal](SDL-ZZFractal.md#acceptance-record) and the
+[record](../evidence/2026-10-08/sdl-fractal/acceptance.json) for the new
+14-render suite, native 16-/32-bit colour checks and timing limitations.

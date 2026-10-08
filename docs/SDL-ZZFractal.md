@@ -99,6 +99,36 @@ icon.library with a 131072-byte stack.
 
 ## Acceptance record
 
-Final hardware and release results are recorded alongside this document after
-acceptance. Audio, texture-renderer compatibility, arbitrary resizing/scaling,
-other hardware and cache-enabled ARM execution remain outside this milestone.
+Physical acceptance on 2026-10-08 passed on the A4000TX / TF4060 / XX19c.
+All 76,800 iteration counts matched the independent oracle in each of 14
+completed renders: ARM/68k, default/zoom/pan, changed iterations, Workbench
+and temporary 16-/32-bit screens. Six rapid cancel/zoom cycles, rendering
+while iconified, restore, overlapping windows and moving the window passed.
+Idle timing stayed unchanged. Shutdown reported RET1 and released the owned
+allocation; the bridge remained responsive with no registered client.
+
+Native CGX readback sampled 475 pixels per true-colour mode: zero mismatches;
+16-bit maximum channel difference 7 (tolerance 8), 32-bit difference 0.
+Bridge screenshots report the P96 dummy 8-bit bitmap and lose true colour on
+these screens; they are not the colour acceptance test. One bridge file-read
+returned no response and succeeded on a bounded read-only retry. No commands
+were blindly retried.
+
+| Default view | Wall | Compute | Transfer | Colour mapping | SDL drawing |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| ARM | 7.575 s | 2.894 s estimate | 94 ms | 38 ms | 745 ms |
+| 68060 | 17.427 s | 2.233 s | 0 | 39 ms | 1,478 ms |
+
+The ARM arithmetic slices are slower in this configuration despite the shorter
+whole-render time. Scheduling granularity, compilers, instrumentation and
+cache policy differ. Optimization and equivalent-work scheduling are next;
+these measurements must not be presented as a raw processor speed ratio.
+The read-only timer calibrated to 333,326,829 ticks/s over 1,014,070 us,
+with a 485 us exchange uncertainty.
+
+Local validation: 4 transport tests with sanitizers, 8 fractal/package tests,
+22 debugger tests, the 138-tool MCP smoke suite, and ARM/68k builds passed.
+The standalone build omits MCP/relay linkage and embeds its ARM payload.
+
+Audio, texture-renderer compatibility, arbitrary resizing/scaling, other
+hardware and cache-enabled ARM execution remain outside this milestone.
