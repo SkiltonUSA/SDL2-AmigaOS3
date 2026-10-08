@@ -148,15 +148,9 @@ static int OS3_VideoInit(_THIS)
         return SDL_SetError("Cannot open intuition.library V39+");
     }
 
-    /* Try CyberGraphX name first (native CGX or P96 with monitor driver).
-       Fall back to Picasso96API.library (P96 without monitor driver,
-       common on FS-UAE where uaegfx provides the card but the P96
-       monitor driver is not installed). Both provide the same API. */
+    /* Local hardware probe: CGX and Picasso96 have different library vectors.
+     * Never call CGX functions through a Picasso96API.library base. */
     CyberGfxBase = OpenLibrary((CONST_STRPTR)CYBERGFXNAME, 40UL);
-    if (!CyberGfxBase) {
-        CyberGfxBase = OpenLibrary(
-            (CONST_STRPTR)"Picasso96API.library", 0UL);
-    }
 
     /* Restore requesters now that library opens are done */
     me->pr_WindowPtr = oldwin;
