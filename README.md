@@ -13,7 +13,7 @@ with an application-owned ARM worker; ordinary SDL calls remain on the 68k.
 ## Versions and downloads
 
 [Download releases](https://github.com/SkiltonUSA/SDL2-AmigaOS3/releases).
-`v0.2.0` provides the SDL2 SDK. `fractal-v0.3.0` updates only the standalone
+`v0.2.0` provides the SDL2 SDK. `v0.3.0` updates only the standalone
 fractal application, using the same library. The SDK adds named public-screen
 selection and the interactive example.
 `v0.1.0` remains available as the initial window-fix preview. The inherited SDL header
@@ -27,16 +27,16 @@ the exact patch, licence, build metadata, and per-file SHA-256 checksums.
 GitHub also provides the tagged source archive. `libSDL2_test.a` is SDL's
 support library for tests, not evidence that the full SDL suite passed.
 
-### SDL ZZFractal 0.3.0 executable
+### SDL2 AmigaOS3 0.3.0 — ZZFractal demo
 
-[Release notes and requirements](https://github.com/SkiltonUSA/SDL2-AmigaOS3/releases/tag/fractal-v0.3.0).
+[Release notes and requirements](https://github.com/SkiltonUSA/SDL2-AmigaOS3/releases/tag/v0.3.0).
 
-- [Amiga LHA package](https://github.com/SkiltonUSA/SDL2-AmigaOS3/releases/download/fractal-v0.3.0/SDLZZFractal-0.3-XX19c.lha) — recommended; includes executable, icons, instructions and licences.
-- [ZIP package](https://github.com/SkiltonUSA/SDL2-AmigaOS3/releases/download/fractal-v0.3.0/SDLZZFractal-0.3-XX19c.zip).
-- [Standalone Amiga executable](https://github.com/SkiltonUSA/SDL2-AmigaOS3/releases/download/fractal-v0.3.0/SDLZZFractal) — SDL2 and the ARM worker are embedded; no Mac or MCP is needed.
-- [Instructions](https://github.com/SkiltonUSA/SDL2-AmigaOS3/releases/download/fractal-v0.3.0/ReadMe.txt) and [SHA-256 checksums](https://github.com/SkiltonUSA/SDL2-AmigaOS3/releases/download/fractal-v0.3.0/SHA256SUMS.txt).
+- [Amiga LHA package](https://github.com/SkiltonUSA/SDL2-AmigaOS3/releases/download/v0.3.0/SDLZZFractal-0.3-XX19c.lha) — recommended; includes executable, icons, instructions and licences.
+- [ZIP package](https://github.com/SkiltonUSA/SDL2-AmigaOS3/releases/download/v0.3.0/SDLZZFractal-0.3-XX19c.zip).
+- [Standalone Amiga executable](https://github.com/SkiltonUSA/SDL2-AmigaOS3/releases/download/v0.3.0/SDLZZFractal) — SDL2 and the ARM worker are embedded; no Mac or MCP is needed.
+- [Instructions](https://github.com/SkiltonUSA/SDL2-AmigaOS3/releases/download/v0.3.0/ReadMe.txt) and [SHA-256 checksums](https://github.com/SkiltonUSA/SDL2-AmigaOS3/releases/download/v0.3.0/SHA256SUMS.txt).
 
-This is the same hardware-verified 0.3 demo published in [Amiga-MCP-Debugger](https://github.com/SkiltonUSA/Amiga-MCP-Debugger/releases/tag/fractal-v0.3.0), still marked as a prerelease for the tested XX19c / XACP 1.7 configuration. For the bare executable, set its executable protection bit and a 131072-byte Shell stack as described in the instructions.
+This is the same hardware-verified 0.3 demo published in [Amiga-MCP-Debugger](https://github.com/SkiltonUSA/Amiga-MCP-Debugger/releases/tag/fractal-v0.3.0), designated Latest on this repository while remaining a preview for the tested XX19c / XACP 1.7 configuration. For the bare executable, set its executable protection bit and a 131072-byte Shell stack as described in the instructions.
 
 ## What changed
 
