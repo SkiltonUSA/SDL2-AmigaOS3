@@ -51,6 +51,10 @@ sample (1). The original non-timing fractal protocol/build remains supported.
 
 ## Measurements
 
+For the original native application versus this SDL version, see the
+[with/without SDL2 comparison](../README.md#fractal-comparison-with-and-without-sdl2).
+Those separate runs do not isolate SDL overhead.
+
 The ARM reads the Zynq global timer at `0xf8f00200` using upper/lower/upper
 rollover protection; it never writes the timer or changes its configuration.
 The map and read sequence follow the AMD/Xilinx standalone sources:

@@ -67,6 +67,32 @@ Clang with an ARM target and LLVM `ld.lld` are also required. The resulting
 This application-owned ARM worker does not make ordinary SDL calls run on ARM.
 Its raw compute and end-to-end timings are deliberately reported separately.
 
+## Fractal comparison: with and without SDL2
+
+Recorded default 320×240 Mandelbrot renders on the same A4000TX / TF4060 /
+ZZ9000. These are whole-render wall times; lower is better.
+
+| Application | SDL2 | ARM render | 68060 render |
+| --- | --- | ---: | ---: |
+| Original native ZZFractal | Without SDL2 | 7.523 seconds | 15.081 seconds |
+| SDL ZZFractal | With SDL2 | 7.575 seconds | 17.427 seconds |
+
+Both versions matched the same reference frame (`fb32f6c6`, all 76,800
+iteration counts). These were separate individual application runs, **not a
+controlled benchmark of SDL2 overhead**. Drawing, instrumentation and scheduling
+differ, so the time difference cannot be attributed to SDL2 alone.
+
+SDL2 provided a reusable graphics/input interface and tested 16-/32-bit RTG
+support; these measurements show no rendering speed improvement. SDL calls
+remain on the 68060, with explicit computation sent to a separate ARM worker.
+In the SDL version, measured computation took about 2.894 seconds on ARM
+versus 2.233 seconds on the 68060. ARM caches remain disabled, and scheduling
+and compilation differ; shorter ARM wall time is not a raw CPU speed ratio.
+
+Evidence: [native baseline](evidence/2026-10-08/sdl-fractal/native-baseline.json),
+[SDL acceptance runs](evidence/2026-10-08/sdl-fractal/acceptance.json), and
+[timing definitions and limitations](docs/SDL-ZZFractal.md#measurements).
+
 ## Use the SDK
 
 Target: AmigaOS 3.x, 68030 or newer, using the GCC/libnix `-noixemul` toolchain.

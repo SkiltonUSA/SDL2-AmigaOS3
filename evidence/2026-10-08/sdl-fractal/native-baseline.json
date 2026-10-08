@@ -1,0 +1,45 @@
+{
+  "utc": "2026-10-08T12:11:29.052792+00:00",
+  "passed": true,
+  "arm_execution_verified": true,
+  "application": "Original native ZZFractal developer acceptance build (without SDL2)",
+  "renders": [
+    {
+      "label": "ARM default",
+      "ok": "1",
+      "mode": "ARM",
+      "running": "0",
+      "gen": "1",
+      "tiles": "150",
+      "hash": "fb32f6c6",
+      "ms": "7523",
+      "pending": "0",
+      "cancel_ms": "0",
+      "renders": "1",
+      "cancels": "0",
+      "discarded": "0",
+      "depth": "0",
+      "error": "0",
+      "all_76800_pixels_match": true
+    },
+    {
+      "label": "68060 default",
+      "ok": "1",
+      "mode": "CPU",
+      "running": "0",
+      "gen": "2",
+      "tiles": "150",
+      "hash": "fb32f6c6",
+      "ms": "15081",
+      "pending": "0",
+      "cancel_ms": "0",
+      "renders": "2",
+      "cancels": "0",
+      "discarded": "0",
+      "depth": "0",
+      "error": "0",
+      "all_76800_pixels_match": true
+    }
+  ],
+  "measurement_scope": "Individual whole-render wall times including scheduling and drawing; not a controlled SDL overhead benchmark."
+}
